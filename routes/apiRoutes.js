@@ -13,10 +13,12 @@ module.exports = function (app) {
       // use cheerio to pull out specific data
       const $ = cheerio.load(response.data);
 
+      // empty the database collection before scraping again
+
       // Padding is the class which holds the desired text elements
       $('.Padding').each((i, el) => {
         // empty object that will store the data
-        const result = {};
+        let result = {};
 
         // save each element to the result object
         result.pub_date = $(el).children('.Byline').text();
@@ -27,7 +29,7 @@ module.exports = function (app) {
 
         // add the result object to the database using the schema created in "model.js"
         db.Article.create(result).then((dbArticle) => {
-          console.log("START ARTICLES")
+          // console.log("START ARTICLES")
           console.log(dbArticle);
         }).catch((error) => {
           console.log(error);
