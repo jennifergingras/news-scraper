@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
+const Schema = mongoose.Schema;
 // create a new Schema object (the model used for each article that will be scraped)
 // this will define the data to be saved in the database
-var ArticleSchema = new mongoose.Schema({
+var ArticleSchema = new Schema({
   pub_date: {
     type: String,
     required: true
@@ -18,6 +19,10 @@ var ArticleSchema = new mongoose.Schema({
   url: {
     type: String,
     required: true
+  },
+  note: {
+    type: Schema.Types.ObjectId,
+    ref: "Note"
   }
 });
 
