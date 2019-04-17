@@ -3,10 +3,32 @@
   <h4>Animal News Stories</h4>
 </header>
 <div class="container">
-  <h5>The latest stuff from National Geographic's animal section. Because animals are the best!</h5>
+  <h5>See the latest stuff from National Geographic's animal section. Because animals are the best!</h5>
 
+  <button class="refresh-btn">Latest Articles</button>
+  <button class="get-saved-btn">Saved Articles</button>
+  <br>
   <h3>Articles:</h3>
-
+  <ul>
+    {{#each articles}}
+    <li>
+      <p>{{this.pub_date}}</p>
+      <p>{{this.headline}}</p>
+      <p>{{this.summary}}</p>
+      <button class="save-article-btn">Save</button>
+      <button class="add-note-btn">Add Note</button>
+      <div class="note">
+        <button class="save-note-btn">Save</button>
+        <button class="delet-note-btn">Delete</button>
+        <div class="note-input">
+          <form>
+            <input note="note" type="text">
+          </form>
+        </div>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
 
 
 </div>
