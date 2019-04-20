@@ -15,24 +15,24 @@
     <h6 class="pub-date">{{this.pub_date}}</h6>
     <h3 class="headline">{{this.headline}}</h3>
     <p class="summary">{{this.summary}}</p>
-    <button class="save-article-btn">Save</button>
-    <button class="add-note-btn">Note</button>
-    <button class="read-btn">Read Article</button>
+    <button class="save-article-btn">Save Article</button>
+    <button class="add-note-btn">Add Note</button>
+    <a href="https://www.nationalgeographic.com.au{{this.url}}" target="_blank">Read Article</a>
     <div class="note">
       <div class="add-note">
-      <button class="edit-note-btn">Edit</button>
-      <button class="save-note-btn">Save</button>
-      <button class="delet-note-btn">Delete</button>
-      <button class="close-note-btn">X</button>
-      <div class="note-input">
-        <form>
-          <input class="note-name" note="note" type="text" placeholder="name">
-          <input class="note-body" note="note" type="text" placeholder="add note">
-        </form>
+        <div class="note-input">
+          <form>
+            <input class="note-name" type="text" placeholder="name">
+            <textarea class="note-body" type="text" placeholder="add note"></textarea>
+            <button type="button" class="edit-note-btn">Edit</button>
+            <button type="button" class="save-note-btn">Save</button>
+            <button type="button" class="delete-note-btn">Delete</button>
+            <button type="button" class="close-note-btn">X</button>
+          </form>
         </div>
-      <div class="populated-note">
-        <p>{{this.note}}</p>
-      </div>
+        <div class="populated-note">
+          <p>{{this.Note}}</p>
+        </div>
       </div>
     </div>
     {{/each}}
