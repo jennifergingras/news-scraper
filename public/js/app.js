@@ -9,52 +9,78 @@ $(document).ready(function () {
 
   // API METHODS
   let API = {
-    getArticle: function (article) {
+    getArticle: function () {
       return $.ajax({
-        url: '/scrape',
+        url: '/api/scrape',
         type: 'GET'
       });
     },
   };
 
+
+  // -------------------
+  // Event Handlers
+  // -------------------
+
   // UPDATE ARTICLES - SCRAPE AGAIN
   $('.refresh-btn').on('click', function (e) {
     e.preventDefault();
-    API.getArticle(article).then(function () {
+    API.getArticle().then(function () {
       console.log('right on!')
-      window.location.reload('/articles');
+      location.assign('/');
     },
       function (error) {
         console.log('nope!')
       });
   });
 
-  // -------------------
-  // Event Handlers
-  // -------------------
 
   // NOTES
   // --------------
   // showing note
-  $('.add-note-btn').on('click', function (e) {
-    e.preventDefault();
+  $('.add-note-btn').on('click', function () {
     noteDiv.show();
   });
 
   // closing note
-  $('.close-note-btn').on('click', function (e) {
-    e.preventDefault();
+  $('.close-note-btn').on('click', function () {
     noteDiv.hide();
   });
 
   // saving a note
+  // $('.save-note-button').on('click', function (e) {
 
+  //   console.log("save note button clicked");
+  //   var thisId = $(this).attr('data-id');
+  //     data: {
+  //       name: $('.note-name').val(),
+  //       body: $('.note-body').val()
+  //     }
+  //   })
+  //     .then(function (data) {
+  //       console.log(data);
+  //       $('.note-name').empty();
+  //       $('.note-body').empty();
+  //     });
+
+  // })
 
 
   // deleting a note
 
 
 
+
+  // // GET ARTICLE AND ADD NOTE
+  // app.get('/articles/:id', function(req, res){
+  //   db.Article.fineOne({ _id: req.params.id }).populate('note')
+  //   .then(function(dbArticle){
+  //     res.json(dbArticle);
+  //   })
+  //   .catch(function(err) {
+  //     res.json(err);
+  //   });
+  // });
 
 
 });

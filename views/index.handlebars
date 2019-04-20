@@ -19,14 +19,20 @@
     <button class="add-note-btn">Note</button>
     <button class="read-btn">Read Article</button>
     <div class="note">
+      <div class="add-note">
       <button class="edit-note-btn">Edit</button>
       <button class="save-note-btn">Save</button>
       <button class="delet-note-btn">Delete</button>
       <button class="close-note-btn">X</button>
       <div class="note-input">
         <form>
-          <input note="note" type="text">
+          <input class="note-name" note="note" type="text" placeholder="name">
+          <input class="note-body" note="note" type="text" placeholder="add note">
         </form>
+        </div>
+      <div class="populated-note">
+        <p>{{this.note}}</p>
+      </div>
       </div>
     </div>
     {{/each}}

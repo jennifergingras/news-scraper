@@ -4,7 +4,7 @@ const db = require('../models');
 
 module.exports = function (app) {
   // route to scrape
-  app.get("/scrape", function (req, res) {
+  app.get("/api/scrape", function (req, res) {
 
     // use axios to get all the data from the website
     axios.get('https://www.nationalgeographic.com.au/news/animals.aspx').then(function (response) {
@@ -25,7 +25,7 @@ module.exports = function (app) {
         result.headline = $(el).children('.Title').text();
         result.summary = $(el).children('.Description').text();
         result.url = $(el).children('a').attr('href');
-        console.log(result);
+        // console.log(result);
 
         // add the result object to the database using the schema created in "model.js"
         db.Article.create(result).then((dbArticle) => {
@@ -37,6 +37,45 @@ module.exports = function (app) {
       });
     });
   });
+
+  // Route for getting all Articles from the db
+  app.get("/articles", function (req, res) {
+    // Grab every document in the Articles collection
+    db.Article.find({})
+      .then(function (dbArticle) {
+        // If we were able to successfully find Articles, send them back to the client
+        res.json(dbArticle);
+      })
+      .catch(function (err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+      });
+  });
+
+  // Route for grabbing a specific Article by id, populate it with it's note
+  app.get("/articles/:id", function (req, res) {
+    // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+    db.Article.findOne({ _id: req.params.id })
+      // ..and populate all of the notes associated with it
+      .populate("note")
+      .then(function (dbArticle) {
+        // If we were able to successfully find an Article with the given id, send it back to the client
+        res.json(dbArticle);
+      })
+      .catch(function (err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+      });
+  });
+
+
+
+  // app.post("/note", function(req, res) {
+  //   console.log(req.body);
+  //   db.Note.create(req.body).then(function(date){
+  //     db.Article.findOneAndUpdate({_id: req.body.Article})
+  //   })
+  // })
 
 
 };
